@@ -125,23 +125,39 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    */
    
   // time lapsed
-  float dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;
-  previous_timestamp_ = measurement_pack.timestamp_;
-  // Update F - state transition
-  ekf_.F_(0,2) = dt;
-  ekf_.F_(1,3) = dt;
-  // Update Q - process noise covariance
-  float dt_2 = dt * dt;
-  float dt_3 = dt_2 * dt;
-  float dt_4 = dt_3 * dt;
-  ekf_.Q_ <<  dt_4/4*noise_ax_, 0, dt_3/2*noise_ax_, 0,
-			  0, dt_4/4*noise_ay_, 0, dt_3/2*noise_ay_,
-			  dt_3/2*noise_ax_, 0, dt_2*noise_ax_, 0,
-			  0, dt_3/2*noise_ay_, 0, dt_2*noise_ay_; 
-			  
-  // Call prediction
-  ekf_.Predict();
+  // Further improvement
+  // when dt is so small e.g. < 0.0001, we can ignore running EKF because it is not worth it 
+  // This has the benefit of being a bit more efficient as it allows you to avoid the extra 
+  // prediction step calculations including the update of F_ and calculation of Q_ above
+  // note: accuracy might be compromised 
   
+  // to do this - skip the prediction step (using the old sate- doesn't change much)
+  //            - keep time stamp
+  //            - run update step on the same time stamp  
+  //
+  
+  float dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;
+  // Record this time stamp
+  previous_timestamp_ = measurement_pack.timestamp_;
+  if (dt > 0.001){
+	  // Update F - state transition
+	  ekf_.F_(0,2) = dt;
+	  ekf_.F_(1,3) = dt;
+	  // Update Q - process noise covariance
+	  float dt_2 = dt * dt;
+	  float dt_3 = dt_2 * dt;
+	  float dt_4 = dt_3 * dt;
+	  ekf_.Q_ <<  dt_4/4*noise_ax_, 0, dt_3/2*noise_ax_, 0,
+				  0, dt_4/4*noise_ay_, 0, dt_3/2*noise_ay_,
+				  dt_3/2*noise_ax_, 0, dt_2*noise_ax_, 0,
+				  0, dt_3/2*noise_ay_, 0, dt_2*noise_ay_; 
+			  
+	  // Call prediction
+	  ekf_.Predict();
+  }
+  else{
+	  cout << "dt is too small: use last state prediction" << endl;
+  }
 
   /*****************************************************************************
    *  Update

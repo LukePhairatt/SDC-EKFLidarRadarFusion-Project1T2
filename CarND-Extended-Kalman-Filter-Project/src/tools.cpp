@@ -76,6 +76,9 @@ void Tools::CalculateJacobian(const VectorXd &x_state, MatrixXd &H, VectorXd &h)
 		 
   // compute the measurement vector
   float rho = c2;
+  // TODO atan2(0,0) is ok on my system but 
+  //      Systems supporting symbolic mathematics normally return an 'undefined value' for atan2(0, 0)
+  //      We need to handle this just to be sure everything running OK
   float theta = float(atan2(x_state(1), x_state(0)));
   float rho_dot; 
   if(is_zero_div){
