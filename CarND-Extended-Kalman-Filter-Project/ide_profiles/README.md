@@ -84,10 +84,8 @@ You will now find two Eclipse project files in your build tree:  `.project` and 
 <img src="./Eclipse/images/Capture-Import.png" width="500">
 5. Now you should have a fully functional eclipse project
 <img src="./Eclipse/images/Capture-Final.png" width="800">
-6. To build .exe
-```
-Project > Build Project
-```
+6. To build .exe using Menu `Project > Build Project`
+
 
 ---
 ### Code Style
