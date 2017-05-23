@@ -1,0 +1,31 @@
+14:04:46 **** Build of project Extended_Kalman_Filter-Debug@build ****
+/usr/bin/make -j4 all 
+/usr/bin/cmake -H"/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src" -B"/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build" --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build/CMakeFiles" "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build/CMakeFiles/progress.marks"
+/usr/bin/make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build'
+/usr/bin/make -f CMakeFiles/ExtendedKF.dir/build.make CMakeFiles/ExtendedKF.dir/depend
+make[2]: Entering directory '/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build'
+cd "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build" && /usr/bin/cmake -E cmake_depends "Unix Makefiles" "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src" "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src" "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build" "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build" "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build/CMakeFiles/ExtendedKF.dir/DependInfo.cmake" --color=
+Scanning dependencies of target ExtendedKF
+make[2]: Leaving directory '/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build'
+/usr/bin/make -f CMakeFiles/ExtendedKF.dir/build.make CMakeFiles/ExtendedKF.dir/build
+make[2]: Entering directory '/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build'
+[ 40%] Building CXX object CMakeFiles/ExtendedKF.dir/FusionEKF.cpp.o
+[ 40%] Building CXX object CMakeFiles/ExtendedKF.dir/kalman_filter.cpp.o
+/usr/bin/c++     -g   -std=c++11 -o CMakeFiles/ExtendedKF.dir/FusionEKF.cpp.o -c "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src/FusionEKF.cpp"
+/usr/bin/c++     -g   -std=c++11 -o CMakeFiles/ExtendedKF.dir/kalman_filter.cpp.o -c "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src/kalman_filter.cpp"
+[ 60%] Building CXX object CMakeFiles/ExtendedKF.dir/tools.cpp.o
+[ 80%] Building CXX object CMakeFiles/ExtendedKF.dir/main.cpp.o
+/usr/bin/c++     -g   -std=c++11 -o CMakeFiles/ExtendedKF.dir/tools.cpp.o -c "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src/tools.cpp"
+/usr/bin/c++     -g   -std=c++11 -o CMakeFiles/ExtendedKF.dir/main.cpp.o -c "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/src/main.cpp"
+[100%] Linking CXX executable ExtendedKF
+/usr/bin/cmake -E cmake_link_script CMakeFiles/ExtendedKF.dir/link.txt --verbose=1
+/usr/bin/c++   -g   CMakeFiles/ExtendedKF.dir/FusionEKF.cpp.o CMakeFiles/ExtendedKF.dir/kalman_filter.cpp.o CMakeFiles/ExtendedKF.dir/main.cpp.o CMakeFiles/ExtendedKF.dir/tools.cpp.o  -o ExtendedKF -lz -lssl -luv -luWS 
+make[2]: Leaving directory '/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build'
+[100%] Built target ExtendedKF
+make[1]: Leaving directory '/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build'
+/usr/bin/cmake -E cmake_progress_start "/home/lukieluke/Documents/Udacity courses/Self driving car/Term2/Lesson6_EKF_Project/CarND-Extended-Kalman-Filter-Project/ide_profiles/build/CMakeFiles" 0
+
+14:04:53 Build Finished (took 7s.285ms)
+
