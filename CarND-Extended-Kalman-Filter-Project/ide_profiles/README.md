@@ -24,14 +24,14 @@ eclipse-inst
 
 You will generate one!  the best way to get an Eclipse IDE project for this project is to generate one using `cmake` and it is really easy.
 
-####1. Create a build directory
+#### 1. Create a build directory
 Create a build directory in your project folder as a sibling to the source directory (`/src`):
 
 ```
 mkdir build
 ```
 
-####2. Change `CMakeLists.txt`
+#### 2. Change `CMakeLists.txt`
 
 1. Be sure to move `CMakeLists.txt` file to the `/src` directory:
 ```
@@ -56,7 +56,7 @@ set(sources
 
 add_executable(ExtendedKF ${sources})
 ```
-####3. CMake 
+#### 3. CMake 
 Go to `build` directory
 ```
 cd build
@@ -66,27 +66,27 @@ and run CMake with the following parameters (see below for commandline). Make su
 ```
 cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ../src/
 ```
-####4. Make
+#### 4. Make
 Now, make the project:
 ```
 make
 ```
 You will now find two Eclipse project files in your build tree:  `.project` and `.cproject`
 
-####5 Import the project into Eclipse
+#### 5 Import the project into Eclipse
 
 1. Open Eclipse (make sure you have the CDT 4.0 or newer).
 2. Import project using Menu `File > Import`
-<img src="./images/Capture-EclipseMenuFileImport.jpg" width="500">
+<img src="./Eclipse/images/Capture-EclipseMenuFileImport.jpg" width="500">
 3. Select `General > Existing projects into workspace`
-<img src="./images/Capture-EclipseProjectsIntoWorkspace.jpg" width="500">
+<img src="./Eclipse/images/Capture-EclipseProjectsIntoWorkspace.jpg" width="500">
 4. **Browse** where your build tree is and select the root build tree directory. Keep "Copy projects into workspace" unchecked.
-<img src="./images/Capture-Import.png" width="500">
+<img src="./Eclipse/images/Capture-Import.png" width="500">
 5. Now you should have a fully functional eclipse project
-<img src="./images/Capture-Final.png" width="800">
+<img src="./Eclipse/images/Capture-Final.png" width="800">
 6. To build .exe
 ```
-Menu **Project > Build Project**
+Project > Build Project
 ```
 
 ---
