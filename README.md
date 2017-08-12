@@ -162,7 +162,7 @@ _Radar Measurement Update_
 		c2 = sqrt(c1)
 		c3 = c1*c2
 
-	[Proof](./CarND-Extended-Kalman-Filter-Project/Docs)
+	[Proof](./CarND-Extended-Kalman-Filter-Project/Docs/MeasurementJacobian.pdf)
 
 
 ```
