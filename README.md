@@ -3,11 +3,189 @@ Self-Driving Car Engineer Nanodegree Program
 ![alt text][image0]
 
 [//]: # (Image References)
-[image0]: ./Docs/Result1.png "project"
+[image0]: ./CarND-Extended-Kalman-Filter-Project/Docs/Result1.png "project"
+
 
 ### Overview ###
 In this project utilize a kalman filter to estimate the state of a moving object of interest with noisy lidar and radar measurements.   
 Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project reburic. 
+
+```sh
+
+                               
+                   y
+                   ^     
+                   |  [object] (px,py)
+                   |   /
+                   |  / range, range_dot
+                   | /      (Radar)
+                   |/ angle
+                   ------------> x 
+		lidar: px,py
+		radar: range,range_dot,angle
+
+```
+In this project, we implement
+
+|    Sensor     | Prediction    | Correction  |
+|:-------------:|:-------------:|:-----------:|
+|     Lidar     |      KF       |      KF     |
+|     Radar     |      KF       |      EKF    |
+
+### KF/EKF Steps ###
+
+
+**STEP 1-Prediction:** Predicting the next state x', and covariance P'
+
+_KF Formula_
+
+```sh
+		x' = F*x + u
+		P' = F*P*Ft + Q
+	where
+		x  = state [px,py,vx,vy]
+		P  = state covariance
+		u  = control input or acceleration (ax,ay) in this case 
+		     (assuem u = 0 for a constant velocity model)
+		F  = State Jacobian matrix
+		Q  = Process/motion noise (due to acceleration)
+		
+	
+```
+
+
+_Linear motion model(with a constant velocity)_:g(x)
+
+```sh
+	
+		px' = px + vx*dt + x motion noise
+		py' = py + vy*dt + y motion noise
+		vx' = vx + x velocity noise
+		vy' = vy + y velocity noise
+	where
+		px  = x position
+		py  = y position
+		vx  = x velocity 
+		vy  = y velocity
+		x motion noise = 0.5*ax*dt*dt
+		y motion noise = 0.5*ay*dt*dt
+		x velocity noise = ax*dt
+		y velocity noise = ay*dt
+
+```
+
+_State Jacobian Matrix_:F
+
+```sh
+		F = dg/dx = 	[1 0 dt 0 ]
+				[0 1 0  dt]
+				[0 0 1  0 ]
+				[0 0 0  1 ]
+
+```
+
+_Control Jacobian and Process Noise_:V,Q
+
+```sh
+
+		u = [ax,ay]
+		Q = V*var_u*Vt
+
+	where
+		
+		V = dg/du= 	[0.5*dt*dt   0        ]
+				[0           0.5*dt*dt]
+				[dt	     0        ]
+				[0	     dt	      ]
+
+
+		var_u = [noise_ax    0        ]
+			[0           noise_ay ]	
+		
+		Q =     [dt_4/4*noise_ax, 0,               dt_3/2*noise_ax, 0,		     ]
+			[0,               dt_4/4*noise_ay, 0,               dt_3/2*noise_ay, ]
+			[dt_3/2*noise_ax, 0,               dt_2*noise_ax,   0,               ]
+			[0,               dt_3/2*noise_ay, 0,               dt_2*noise_ay    ] 
+	
+		
+
+```
+
+**STEP 2-Correction:**  
+
+_EKF Formula (Correction)_
+
+```sh
+	From the prediction set
+		x = x' 
+		P = P'
+
+	then do the update
+
+		K = 	    P*HT
+              		--------------
+               		(H*P*HT + R)
+
+        	x  =     x + K*(Z - z)
+
+        	P  =     (I - Kt*H)*x
+
+	where 
+		H  = Measurement Jacobian 
+		Z  = Measurement
+		z  = Predicted measurement
+		R  = Measurement noises 
+	
+
+```
+
+_Radar Measurement Update_
+```sh
+
+	h(x)  = [rho    ]   = [sqrt(px*px + py*py) ]
+                [theta  ]     [atan2(py,px)        ]
+		[rho_dot]     [(px*vx + py*vy)/rho ]
+
+	where
+
+		rho = range measurement of a target
+		theta = bearing angle of a target
+		rho_dot = rate of change in range of a target 
+
+	
+	H(x)  = dh/dx  = [ (px/c2),                (py/c2),               0,     0,     ]
+	   		 [-(py/c1),                (px/c1),               0,     0,     ]
+		 	 [ py*(vx*py - vy*px)/c3,  px*(px*vy - py*vx)/c3, px/c2, py/c2  ]
+
+	where
+		c1 = px*px + py*py
+		c2 = sqrt(c1)
+		c3 = c1*c2
+
+	[Proof see pdf](./CarND-Extended-Kalman-Filter-Project/Docs/)
+
+
+```
+
+
+_Lidar Measurement Update_
+```sh
+
+  	h(x) = [px]   =   H * [px]
+               [py]           [px]
+			      [vx]
+	                      [vy]
+
+	where
+
+	px = a target/object x-position
+	py = a target/object y-position
+
+
+	H    = [1, 0, 0, 0,]
+  	       [0, 1, 0, 0 ]
+```
+
 
 ### Installation ###
 (Note: see InstallationNote.md for my installation in Ubuntu) 
