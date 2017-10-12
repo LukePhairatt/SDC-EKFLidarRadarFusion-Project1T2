@@ -172,7 +172,7 @@ _Lidar Measurement Update_
 ```sh
 
   	h(x) = [px]   =   H * [px]
-               [py]           [px]
+               [py]           [py]
 			      [vx]
 	                      [vy]
 
