@@ -40,7 +40,6 @@ $ make
 $ ./ExtendedKF
 
 step 5
-Sit back and relax
 
 
 
